@@ -1,0 +1,16 @@
+.SearchBarStyle{
+    float:left;
+    width:80%;
+    margin-right:10px;
+}
+
+.SearchListStyle{
+    height: 400px;
+    width:100%;
+    margin-top:10px;
+    overflow: auto;
+}
+
+.ShopInfoStyle{
+    text-align: left;
+}

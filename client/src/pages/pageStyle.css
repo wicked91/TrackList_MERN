@@ -1,0 +1,52 @@
+.HomeStyleOuter{
+    position: absolute;
+    top:50px;
+    left:40%;
+    width: 400px;
+    height: 700px;
+}
+
+.MakeShopStyle{
+    position: absolute;
+    top:50px;
+    left:40%;
+    width: 400px;
+    height: 700px;
+}
+
+.HomeStyleInner select{
+    border-radius: 10px;
+    width:250px;
+    height:25px;
+}
+
+.ShopPageStyle {
+    text-align: center;
+}
+
+.ShopSearchBarStyle{
+    position: relative;
+    text-align: center;
+    margin-top:20px;
+    width:50%;
+}
+
+.ScrollBoxStyle{
+    display:inline-block;
+    margin-right:20px;
+}
+.ListBoxStyle{
+    display:inline-block;
+    margin-left:20px;
+}
+.ScrollBoxContents{
+    border-style: ridge;
+    border-radius: 10px;
+}
+.ListBoxContents{
+    border-style: ridge;
+    border-radius: 10px;
+}
+.buttonDivStyle{
+    display:inline-block;
+}

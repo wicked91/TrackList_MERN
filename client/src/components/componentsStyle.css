@@ -1,0 +1,43 @@
+.layout{
+    width:100%;
+    margin-top: 10px;
+}
+
+.SearchBarInput{
+    float:left;
+    width:70%;
+    margin-right:5px;
+}
+
+.outerStyle{
+    text-align: left;
+    height: 100%;
+    width:100%;
+    overflow:auto;
+    position: relative;
+}
+
+.innerStyle{
+    width:100%;
+    height:700px;
+}
+
+.rowStyle{
+    height:20px;
+}
+
+.itemLayout{
+    width:100%;
+    height:50px;
+    margin-bottom: 2px;
+}
+
+.artistStyle{
+    font-size:12px;
+    margin-top: 2px;
+}
+
+.titleStyle{
+    font-size:15px;
+}
+

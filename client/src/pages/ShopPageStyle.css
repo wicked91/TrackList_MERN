@@ -1,0 +1,42 @@
+.ShopPageMain{
+    position: relative;
+    left: 15%;
+    width: 1000px;
+    height: 800px;
+}
+
+.tagStyle{
+    padding-top:5px;
+    position: relative;
+    height:3%;
+}
+
+.Header{
+    position: relative;
+    height:7%;
+}
+
+.Body{
+    position: relative;
+    float:bottom;
+    border-style: ridge;
+    width:100%;
+    height:89%
+}
+
+.SearchStyle{
+    position: relative;
+    float:left;
+    border-style: ridge;
+    width:70%;
+    height:100%;
+}
+
+.ListStyle{
+    position: relative;
+    float:right;
+    border-style: ridge;
+    width:30%;
+    height:100%;
+}
+
