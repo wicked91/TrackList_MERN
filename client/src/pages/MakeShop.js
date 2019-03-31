@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import './pageStyle.css';
+import '../style/pageStyle.css'
 
 class MakeShop extends Component {
     constructor(props) {

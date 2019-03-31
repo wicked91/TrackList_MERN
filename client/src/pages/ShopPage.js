@@ -13,8 +13,8 @@ import SearchBar from '../components/SearchBar';
 import ScrollBox from '../components/ScrollBox';
 import ListBox from '../components/ListBox';
 
-import './pageStyle.css';
-import './ShopPageStyle.css';
+import '../style/pageStyle.css';
+import '../style/ShopPageStyle.css';
 
 class ShopPage extends Component {
 

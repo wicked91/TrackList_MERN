@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Media, Button, Input } from 'reactstrap';
-import './componentsStyle.css'
+import {Media, Button } from 'reactstrap';
+import '../style/componentsStyle.css';
 
 class ListInfo extends Component {
 

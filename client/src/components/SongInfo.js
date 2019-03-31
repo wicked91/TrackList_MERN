@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button } from 'reactstrap';
-import './componentsStyle.css';
+import '../style/componentsStyle.css';
 
 class SongInfo extends Component {
 

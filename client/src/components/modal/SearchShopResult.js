@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import ShopInfo from './ShopInfo';
 import { Button, ButtonGroup, Input } from 'reactstrap';
-import './modalStyle.css';
+import 'style/modalStyle.css';
 
 class SearchShopResult extends Component {
     constructor(props) {

@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as updateActions from '../modules/update';
 import SongInfo from './SongInfo';
 import axios from 'axios';
-import {Table} from 'reactstrap';
-import './componentsStyle.css'
+import { Table } from 'reactstrap';
+import '../style/componentsStyle.css';
 
 class ScrollBox extends Component {
 
@@ -49,9 +49,9 @@ class ScrollBox extends Component {
                                         dataKey={i}
                                         flag={true}
                                         onAddList={this.onAddList.bind(this)} />
-                                );   
+                                );
                             })}
-                        </tbody>                
+                        </tbody>
                     </Table>
                 </div>
             </div>
@@ -60,10 +60,10 @@ class ScrollBox extends Component {
 }
 
 export default connect(
-    (state) =>({
-        tracklist:state.update.tracklist
+    (state) => ({
+        tracklist: state.update.tracklist
     }),
-    (dispatch)=>({
+    (dispatch) => ({
         UpdateActions: bindActionCreators(updateActions, dispatch)
     })
 )(ScrollBox);

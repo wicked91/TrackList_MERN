@@ -6,7 +6,7 @@ import * as updateActions from '../modules/update';
 
 import axios from 'axios';
 import ListInfo from './ListInfo';
-import './componentsStyle.css';
+import '../style/componentsStyle.css';
 
 class ListBox extends Component {
 

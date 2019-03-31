@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Input } from 'reactstrap';
-import './componentsStyle.css'
+import '../style/componentsStyle.css';
 
 const SearchBar = ({onChange, onSearch}) => {
     return(

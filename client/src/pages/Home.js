@@ -7,7 +7,7 @@ import * as baseAction from '../modules/base';
 import SearchShopResult from '../components/modal/SearchShopResult'
 import { Button, Form, FormGroup, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import './pageStyle.css';
+import '../style/pageStyle.css';
 
 class Home extends Component {
 

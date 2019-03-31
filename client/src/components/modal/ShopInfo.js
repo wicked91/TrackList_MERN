@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Button } from 'reactstrap';
-import './modalStyle.css';
+import 'style/modalStyle.css';
 
 class ShopInfo extends Component{
     onClickHandler = () =>{
