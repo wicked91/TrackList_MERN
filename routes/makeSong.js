@@ -19,12 +19,9 @@ var addSong = function (req, res) {
 			img: paramImg
 		});
 
-		song.savesong(function (err, result) {
+		song.savesong(function (err) {
 			if (err) {
-				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
-				res.write('<p>' + err.stack + '</p>');
-				res.end();
+				console.log(err);
 				return;
 			}
 			console.log("Song add Success.");
@@ -32,8 +29,7 @@ var addSong = function (req, res) {
 		})
 		
 	} else {
-		res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-		res.write('<h2>database connect failed</h2>');
+		console.log('Database Connect Fail');
 		res.end();
 	}
 };
@@ -53,9 +49,7 @@ var removeSong = function (req, res) {
 	if (database.db) {
 		database.songModel.removesong(paramId, paramTitle, paramArtist, paramImg, function (err, results) {
 			if (err) {
-				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
-				res.write('<p>' + err.stack + '</p>');
+				console.log(err);
 				res.end();
 				return;
 			}
@@ -77,10 +71,7 @@ var showList = function (req, res) {
 	if (database.db) {
 		database.songModel.list(paramId, function (err, results) {
 			if (err) {
-				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<h2>ShowList Database ERROR</h2>');
-				res.write('<p>' + err.stack + '</p>');
-				res.end();
+				console.log(err);
 				return;
 			}
 			if (results) {
@@ -88,8 +79,7 @@ var showList = function (req, res) {
 			}
 		});
 	} else {
-		res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-		res.write('<h2>Database Connect Fail</h2>');
+		console.log('Database Connect Fail');
 		res.end();
 	}
 };

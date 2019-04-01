@@ -13,10 +13,8 @@ Schema.createSchema = function (mongoose) {
 	ShopSchema.methods = {
 		saveshop: function (callback) {
 			var self = this;
-
 			this.validate(function (err) {
 				if (err) return callback(err);
-
 				self.save(callback);
 			});
 		}

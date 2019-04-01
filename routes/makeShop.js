@@ -13,20 +13,15 @@ var addShop = function (req, res) {
 
         shop.saveshop(function (err) {
             if (err) {
-                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-                res.write('<p>' + err.stack + '</p>');
-                res.end();
-                return;
+                console.log(err);
+				return;
             }
-
             console.log("Shop add Success.");
             res.end();
         });
-
     } else {
-        res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-        res.write('<h2>database connect failed</h2>');
-        res.end();
+		console.log('Database Connect Fail');
+		res.end();
     }
 };
 
@@ -40,12 +35,9 @@ var shopList = function (req, res) {
     if (database.db) {
 		database.shopModel.list(paramShopname, function (err, results) {
 			if (err) {
-				res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-				res.write('<p>' + err.stack + '</p>');
-				res.end();
+                console.log(err);
 				return;
             }
-            
 			if (results) {
                 res.send(results);
 			}else{
@@ -54,8 +46,7 @@ var shopList = function (req, res) {
 		});
 
 	} else {
-		res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
-		res.write('<h2>database connect failed</h2>');
+		console.log('Database Connect Fail');
 		res.end();
 	}
 };

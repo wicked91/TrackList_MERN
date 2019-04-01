@@ -35,8 +35,7 @@ SchemaSong.createSchema = function (mongoose) {
                 .exec(callback);
         },
         removesong: function (id, title, artist, img, callback) {
-            this.findOne({ 'shopid': id, 'title': title, 'artist': artist, 'img': img })
-                .remove()
+            this.findOneAndRemove({ 'shopid': id, 'title': title, 'artist': artist, 'img': img })
                 .exec(callback);
         }
     }

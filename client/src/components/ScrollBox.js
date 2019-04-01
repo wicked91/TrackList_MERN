@@ -12,21 +12,23 @@ class ScrollBox extends Component {
 
     onAddList = async (key) => {
         const { UpdateActions, listResult, shopid } = this.props;
-        console.log('Selected Song : ' + listResult[key].title + ' ' + listResult[key].artist + ' ' + listResult[key].img);
+        console.log('Selected Song : ' + listResult[key].trackName + ' ' + listResult[key].artistName + ' ' + listResult[key].artworkUrl100);
 
-        await axios.post('/process/addSong', {
-            title: listResult[key].title,
-            artist: listResult[key].artist,
-            img: listResult[key].img,
-            id: shopid
-        });
-
-        const response = await axios.get(`/process/showList/${shopid}`);
-        UpdateActions.updatelist(response);
+        try{
+            await axios.post('/process/addSong', {
+                title: listResult[key].trackName,
+                artist: listResult[key].artistName,
+                img: listResult[key].artworkUrl100,
+                id: shopid
+            });
+            const response = await axios.get(`/process/showList/${shopid}`);
+            UpdateActions.updatelist(response);
+        } catch(e){
+            console.log(e);
+        }
     }
 
     render() {
-
         return (
             <div className="outerStyle">
                 <div className="innerStyle">
@@ -42,9 +44,9 @@ class ScrollBox extends Component {
                         <tbody>
                             {this.props.listResult.map((data, i) => {
                                 return (
-                                    <SongInfo title={data.title}
-                                        artist={data.artist}
-                                        img={data.img}
+                                    <SongInfo title={data.trackName}
+                                        artist={data.artistName}
+                                        img={data.artworkUrl100}
                                         key={i}
                                         dataKey={i}
                                         flag={true}

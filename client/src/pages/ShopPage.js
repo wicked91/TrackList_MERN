@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import update from 'react-addons-update';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,27 +28,10 @@ class ShopPage extends Component {
         const { title } = this.props;
         console.log("search Keyword : " + title);
         try {
+            const response = await axios.get(`https://itunes.apple.com/search?term=${title}&limit=25&entity=song`);
             this.setState({
-                listResult: update(this.state.listResult, {
-                    $splice: [[0, 20]]
-                })
+                listResult : response.data.results
             });
-
-            const response = await axios.get(`/process/search/${title}`);
-
-            for (let index in response.data) {
-                const title = response.data[index].title[0];
-                const artist = response.data[index]["maniadb:artist"][0].name[0];
-                const img = response.data[index]["maniadb:album"][0].image[0];
-
-                this.setState({
-                    listResult: update(this.state.listResult, {
-                        $push: [{ "title": title, "artist": artist, "img": img }]
-                    })
-                });
-            }
-
-            console.log(this.state.listResult);
         } catch (e) {
             console.log(e);
         }
