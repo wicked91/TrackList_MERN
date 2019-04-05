@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db_url = require('../config/db_url').db_url;
+var db_url = require('../config/keys').db_url;
 var database = {};
 
 database.init = function (app, config) {
