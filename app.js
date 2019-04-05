@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
-
+const cors = require('cors');
 
 const app = express();
 //************************Modules************************
@@ -20,7 +20,7 @@ app.set('port', process.env.PORT || config.server_port);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-
+app.use(cors());
 app.use(morgan('common'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
