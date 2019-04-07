@@ -33,7 +33,6 @@ class SearchShopResult extends Component {
         const { shoplist } = this.state;
 
         const response = await axios.get(`/process/showList/${shoplist[Key]._id}`);
-        console.log('This is Modal after onClick shopname');
         console.log(response);
 
         UpdateActions.updatelist(response);

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as updateActions from '../modules/update';
+import * as searchAction from '../modules/search';
+
 import SongInfo from './SongInfo';
 import axios from 'axios';
 import { Table } from 'reactstrap';
@@ -11,14 +13,14 @@ import '../style/componentsStyle.css';
 class ScrollBox extends Component {
 
     onAddList = async (key) => {
-        const { UpdateActions, listResult, shopid } = this.props;
-        console.log('Selected Song : ' + listResult[key].trackName + ' ' + listResult[key].artistName + ' ' + listResult[key].artworkUrl100);
+        const { UpdateActions, searchResult, shopid } = this.props;
+        console.log('Selected Song : ' + searchResult[key].trackName + ' ' + searchResult[key].artistName + ' ' + searchResult[key].artworkUrl100);
 
         try{
             await axios.post('/process/addSong', {
-                title: listResult[key].trackName,
-                artist: listResult[key].artistName,
-                img: listResult[key].artworkUrl100,
+                title: searchResult[key].trackName,
+                artist: searchResult[key].artistName,
+                img: searchResult[key].artworkUrl100,
                 id: shopid
             });
             const response = await axios.get(`/process/showList/${shopid}`);
@@ -42,7 +44,7 @@ class ScrollBox extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.listResult.map((data, i) => {
+                            {this.props.searchResult.map((data, i) => {
                                 return (
                                     <SongInfo title={data.trackName}
                                         artist={data.artistName}
@@ -63,9 +65,11 @@ class ScrollBox extends Component {
 
 export default connect(
     (state) => ({
+        searchResult : state.search.searchResult,
         tracklist: state.update.tracklist
     }),
     (dispatch) => ({
+        SearchAction : bindActionCreators(searchAction, dispatch),
         UpdateActions: bindActionCreators(updateActions, dispatch)
     })
 )(ScrollBox);

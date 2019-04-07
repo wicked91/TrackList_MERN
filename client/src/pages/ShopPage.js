@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as keywordActions from '../modules/keyword';
+import * as searchAction from '../modules/search';
 import * as usersActions from '../modules/users';
 import * as updateActions from '../modules/update';
 
@@ -17,34 +15,9 @@ import '../style/ShopPageStyle.css';
 
 class ShopPage extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            listResult: []
-        }
-    }
-
-    handleSearch = async () => {
-        const { title } = this.props;
-        console.log("search Keyword : " + title);
-        try {
-            const response = await axios.get(`https://itunes.apple.com/search?term=${title}&limit=25&entity=song`);
-            this.setState({
-                listResult : response.data.results
-            });
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    handleChange = (e) => {
-        const { KeywordActions } = this.props;
-        KeywordActions.search(e.target.value);
-    }
-
     render() {
         const { handleChange, handleSearch } = this;
-        const { nickname, shopname, shopid } = this.props;
+        const { shopname, shopid } = this.props;
 
         return (
             <div className="ShopPageMain">
@@ -57,8 +30,7 @@ class ShopPage extends Component {
                 </div>
                 <div className="Body">
                     <div className="SearchStyle">
-                        <ScrollBox listResult={this.state.listResult}
-                            shopid={shopid} />
+                        <ScrollBox shopid={shopid} />
                     </div>
                     <div className="ListStyle">
                         <ListBox shopid={shopid} />
@@ -71,16 +43,11 @@ class ShopPage extends Component {
 
 export default connect(
     (state) => ({
-        title: state.keyword.title,
-        nickname: state.users.nickname,
-        age: state.users.age,
-        gender: state.users.gender,
         shopname: state.users.shopname,
         shopid: state.users.shopid,
-        tracklist: state.update.tracklist
     }),
     (dispatch) => ({
-        KeywordActions: bindActionCreators(keywordActions, dispatch),
+        SearchActions: bindActionCreators(searchAction, dispatch),
         UsersActions: bindActionCreators(usersActions, dispatch),
         UpdateActions: bindActionCreators(updateActions, dispatch)
     })

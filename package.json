@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
@@ -19,9 +20,12 @@
     "urlencode": "^1.1.0",
     "xml2js": "^0.4.19"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && cd client && npm install && npm run build"
   },
   "author": "",
