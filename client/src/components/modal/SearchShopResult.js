@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as usersAction from 'modules/users';
-import * as updateActions from 'modules/update';
+
+import * as shopAction from 'modules/shop';
 import * as baseActions from 'modules/base';
 import axios from 'axios';
 
@@ -14,30 +14,30 @@ class SearchShopResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            keyword: "",
             shoplist: []
         };
     };
 
     searchShopHandler = async () => {
-        const { shopname } = this.state;
-        const results = await axios.get(`/process/shopList/${shopname}`);
-        console.log(results);
+        const { keyword } = this.state;
+        const response = await axios.get(`/process/shopList/${keyword}`);
+        console.log(response.data.msg);
         this.setState({
-            shoplist: results.data
+            shoplist: response.data.results
         });
-        
     }
 
     submitHandler = async (Key) => {
-        const { UsersActions, UpdateActions, BaseActions } = this.props;
+        const { ShopAction, BaseActions } = this.props;
         const { shoplist } = this.state;
 
-        const response = await axios.get(`/process/showList/${shoplist[Key]._id}`);
-        console.log(response);
+        const shopInfo = {
+            selected_shopid: shoplist[Key]._id,
+            selected_shopname: shoplist[Key].shopname
+        }
 
-        UpdateActions.updatelist(response);
-        UsersActions.shopname(shoplist[Key].shopname);
-        UsersActions.shopid(shoplist[Key]._id);
+        await ShopAction.tracklistRead(shopInfo);
         BaseActions.setModal(false);
     }
 
@@ -48,7 +48,7 @@ class SearchShopResult extends Component {
                     <div className="SearchBarStyle">
                         <Input onChange={(e) => {
                             this.setState({
-                                shopname: e.target.value
+                                keyword: e.target.value
                             });
                         }} />
                     </div>
@@ -82,13 +82,10 @@ class SearchShopResult extends Component {
 export default connect(
     (state) => ({
         modal: state.base.modal,
-        shopname: state.users.shopname,
-        shopid: state.users.shopid,
-        tracklist: state.update.tracklist
+        tracklist: state.shop.tracklist
     }),
     (dispatch) => ({
-        UsersActions: bindActionCreators(usersAction, dispatch),
-        UpdateActions: bindActionCreators(updateActions, dispatch),
-        BaseActions: bindActionCreators(baseActions, dispatch)
+        BaseActions: bindActionCreators(baseActions, dispatch),
+        ShopAction: bindActionCreators(shopAction, dispatch)
     })
 )(SearchShopResult);

@@ -35,6 +35,8 @@ route_loader.init(app, express.Router());
 database.init(app, config);
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
+
+
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('*', (req, res) => {

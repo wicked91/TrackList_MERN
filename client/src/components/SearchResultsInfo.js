@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button } from 'reactstrap';
 import '../style/componentsStyle.css';
 
-class SongInfo extends Component {
+class SearchResultsInfo extends Component {
 
     onClickhandler = () => {
         const { dataKey, onAddList } = this.props;
@@ -27,4 +27,4 @@ class SongInfo extends Component {
     }
 }
 
-export default SongInfo;
+export default SearchResultsInfo;

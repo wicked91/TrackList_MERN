@@ -2,30 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as updateActions from '../modules/update';
-import * as searchAction from '../modules/search';
+import * as shopAction from '../modules/shop';
 
-import SongInfo from './SongInfo';
-import axios from 'axios';
+import SearchResultsInfo from './SearchResultsInfo';
 import { Table } from 'reactstrap';
 import '../style/componentsStyle.css';
 
-class ScrollBox extends Component {
+class SearchResults extends Component {
 
     onAddList = async (key) => {
-        const { UpdateActions, searchResult, shopid } = this.props;
-        console.log('Selected Song : ' + searchResult[key].trackName + ' ' + searchResult[key].artistName + ' ' + searchResult[key].artworkUrl100);
+        const { ShopAction, searchResult, selected_shopid } = this.props;
 
-        try{
-            await axios.post('/process/addSong', {
-                title: searchResult[key].trackName,
-                artist: searchResult[key].artistName,
-                img: searchResult[key].artworkUrl100,
-                id: shopid
-            });
-            const response = await axios.get(`/process/showList/${shopid}`);
-            UpdateActions.updatelist(response);
-        } catch(e){
+        const songInfo = {
+            title: searchResult[key].trackName,
+            artist: searchResult[key].artistName,
+            img: searchResult[key].artworkUrl100,
+            id: selected_shopid
+        }
+
+        try {
+            await ShopAction.tracklistAdd(songInfo);
+        } catch (e) {
             console.log(e);
         }
     }
@@ -46,7 +43,7 @@ class ScrollBox extends Component {
                         <tbody>
                             {this.props.searchResult.map((data, i) => {
                                 return (
-                                    <SongInfo title={data.trackName}
+                                    <SearchResultsInfo title={data.trackName}
                                         artist={data.artistName}
                                         img={data.artworkUrl100}
                                         key={i}
@@ -65,11 +62,10 @@ class ScrollBox extends Component {
 
 export default connect(
     (state) => ({
-        searchResult : state.search.searchResult,
-        tracklist: state.update.tracklist
+        selected_shopid : state.shop.selected_shopid,
+        searchResult: state.search.searchResult
     }),
     (dispatch) => ({
-        SearchAction : bindActionCreators(searchAction, dispatch),
-        UpdateActions: bindActionCreators(updateActions, dispatch)
+        ShopAction: bindActionCreators(shopAction, dispatch)
     })
-)(ScrollBox);
+)(SearchResults);

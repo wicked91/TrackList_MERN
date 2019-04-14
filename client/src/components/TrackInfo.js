@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Media, Button } from 'reactstrap';
 import '../style/componentsStyle.css';
 
-class ListInfo extends Component {
+class TrackInfo extends Component {
 
     onClickhandler = () => {
         const { onRemoveList, dataKey } = this.props;
@@ -35,9 +35,8 @@ class ListInfo extends Component {
                     </Media>
                 </Media>
             </div>
-
         );
     }
 }
 
-export default ListInfo;
+export default TrackInfo;

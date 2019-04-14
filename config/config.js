@@ -1,15 +1,15 @@
 module.exports = {
     server_port: 5000,
     db_schemas: [
-        { file: './shop_schema', collection: 'shops', schemaName: 'shopSchema', modelName: 'shopModel' },
-        { file: './song_schema', collection: 'songs', schemaName: 'songSchema', modelName: 'songModel' }
+        { file: './shopSchema', collection: 'shops', schemaName: 'shop_Schema', modelName: 'shopModel' },
+        { file: './songSchema', collection: 'songs', schemaName: 'song_Schema', modelName: 'songModel' }
     ],
     route_info: [
-        { file: './makeShop', path: '/process/addShop/:shopname', method: 'addShop', type: 'get' },
-        { file: './makeShop', path: '/process/shopList/:shopname', method: 'shopList', type: 'get' },
-        { file: './makeSong', path: '/process/addSong', method: 'addSong', type: 'post' },
-        { file: './makeSong', path: '/process/removeSong', method: 'removeSong', type: 'post' },
-        { file: './makeSong', path: '/process/showList/:paramId', method: 'showList', type: 'get' },
+        { file: './shop', path: '/process/addShop/:shopname', method: 'addShop', type: 'get' },
+        { file: './shop', path: '/process/shopList/:shopname', method: 'shopList', type: 'get' },
+        { file: './song', path: '/process/addSong', method: 'addSong', type: 'post' },
+        { file: './song', path: '/process/removeSong/:shopId/:songId', method: 'removeSong', type: 'delete' },
+        { file: './song', path: '/process/trackList/:paramId', method: 'trackList', type: 'get' },
         { file: './search', path: '/process/search/:keyword', method: 'search', type: 'get' }
     ]
 }

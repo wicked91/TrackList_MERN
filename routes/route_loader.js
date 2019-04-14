@@ -18,8 +18,8 @@ function initRoutes(app, router) {
             router.get(curItem.path, curModule[curItem.method]);
         } else if (curItem.type == 'post') {
             router.post(curItem.path, curModule[curItem.method]);
-        } else {
-            router.post(curItem.path, curModule[curItem.method]);
+        } else if (curItem.type == 'delete'){
+            router.delete(curItem.path, curModule[curItem.method]);
         }
         console.log('Routing Module [%s] SET', curItem.method);
     }

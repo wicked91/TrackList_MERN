@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import * as shopAction from '../modules/shop';
 import * as usersAction from '../modules/users';
 import * as baseAction from '../modules/base';
 
@@ -16,14 +18,12 @@ class Home extends Component {
         this.state = {
             nickname: '',
             age: '',
-            gender: '',
-            shopname: '',
-            shopid: ""
+            gender: ''
         }
     }
 
     render() {
-        const { BaseActions, history, modal, shopname } = this.props;
+        const { BaseActions, history, modal, selected_shopname } = this.props;
 
         return (
             <div className="HomeStyleOuter">
@@ -59,7 +59,13 @@ class Home extends Component {
                         </Input>
                     </FormGroup>
                     <FormGroup>
-                        <Input onClick={()=>{BaseActions.setModal(true)}} value={shopname} placeholder="shop name" readOnly/>
+                        <Input onClick={()=>{
+                            BaseActions.setModal(true);
+                            console.log(selected_shopname);
+                            }} 
+                            value={selected_shopname} 
+                            placeholder="shop name" 
+                            readOnly/>
                         <Modal isOpen={modal} className={this.props.className}>
                             <ModalHeader>Search Shop</ModalHeader>
                             <ModalBody>
@@ -80,10 +86,13 @@ class Home extends Component {
                         const { nickname, age, gender } = this.state;
                         const { UsersActions } = this.props;
 
-                        UsersActions.nickname(nickname);
-                        UsersActions.age(age);
-                        UsersActions.gender(gender);
+                        const userInfo = {
+                            nickname,
+                            age,
+                            gender
+                        }
 
+                        UsersActions.createUser(userInfo);
                         history.push('/shoppage');
                     }}>Submit</Button>
 
@@ -99,11 +108,11 @@ export default connect(
         nickname: state.users.nickname,
         age: state.users.age,
         gender: state.users.gender,
-        shopname: state.users.shopname,
-        shopid: state.users.shopid
+        selected_shopname : state.shop.selected_shopname
     }),
     (dispatch) => ({
         BaseActions: bindActionCreators(baseAction, dispatch),
-        UsersActions: bindActionCreators(usersAction, dispatch)
+        UsersActions: bindActionCreators(usersAction, dispatch),
+        ShopAction: bindActionCreators(shopAction, dispatch)
     })
 )(Home);

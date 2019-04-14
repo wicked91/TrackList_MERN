@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import base from './base';
-import update from './update';
+import shop from './shop';
 import users from './users';
 import search from './search';
 
 export default combineReducers({
     base,
-    update,
+    shop,
     users,
     search,
 });
