@@ -3,9 +3,6 @@ const http = require('http');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const expressSession = require('express-session');
-const cors = require('cors');
 
 const app = express();
 //************************Modules************************
@@ -18,24 +15,12 @@ app.set('port', process.env.PORT || config.server_port);
 
 //************************middleware************************
 
-// Serve static files from the React app
-
-app.use(cors());
 app.use(morgan('common'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(expressSession({
-    secret: 'MYSIGN',
-    resave: true,
-    saveUninitialized: true
-}));
 
 route_loader.init(app, express.Router());
 database.init(app, config);
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 

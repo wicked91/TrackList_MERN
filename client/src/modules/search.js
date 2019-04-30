@@ -6,10 +6,8 @@ const getPostResult = createAction(GET_POST_RESULT);
 
 export const getSearchMusicResult = (keyword) => dispatch => {
 
-    axios.get(`/process/search/${keyword}`)
-            .then((response)=>{
-                dispatch(getPostResult(response.data.results));
-            });
+    axios.get(`https://itunes.apple.com/search?term=${keyword}&limit=25&entity=song`)
+            .then((response) => dispatch(getPostResult(response.data.results)));
 }
 
 const initialState = {
