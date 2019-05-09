@@ -6,7 +6,7 @@ const getPostResult = createAction(GET_POST_RESULT);
 
 export const getSearchMusicResult = (keyword) => dispatch => {
 
-    axios.get(`/process/search/${keyword}`)
+    axios.get(`/songs/search/${keyword}`)
             .then((response)=>{
                 dispatch(getPostResult(response.data.results));
             });

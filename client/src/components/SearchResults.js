@@ -14,10 +14,10 @@ class SearchResults extends Component {
         const { ShopAction, searchResult, selected_shopid } = this.props;
 
         const songInfo = {
+            shopid: selected_shopid,
             title: searchResult[key].trackName,
             artist: searchResult[key].artistName,
-            img: searchResult[key].artworkUrl100,
-            id: selected_shopid
+            img: searchResult[key].artworkUrl100
         }
 
         try {

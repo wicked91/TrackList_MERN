@@ -79,7 +79,7 @@ class Home extends Component {
 
                     <Button color="link" onClick={() => {
                         history.push('/makeshop');
-                    }}>Make Shop</Button>
+                    }}>Add Shop</Button>
                     <br />
                     <br />
                     <Button color="primary" onClick={() => {

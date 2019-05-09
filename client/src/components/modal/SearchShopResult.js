@@ -21,10 +21,9 @@ class SearchShopResult extends Component {
 
     searchShopHandler = async () => {
         const { keyword } = this.state;
-        const response = await axios.get(`/process/shopList/${keyword}`);
-        console.log(response.data.msg);
+        const response = await axios.get(`/shops/search/${keyword}`);
         this.setState({
-            shoplist: response.data.results
+            shoplist: response.data.shops
         });
     }
 

@@ -3,32 +3,41 @@ const http = require('http');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-
 const app = express();
-//************************Modules************************
-const config = require('./config/config');
-const route_loader = require('./routes/route_loader');
-const database = require('./database/database');
 
-//************************Setting************************
-app.set('port', process.env.PORT || config.server_port);
+const mongoose = require("mongoose");
+const db = require("./config/keys_dev").db_url;
 
-//************************middleware************************
+// Router
+const shopRouter = require("./routes/api/shops");
+const songRouter = require("./routes/api/songs");
+
+
+app.set('port', process.env.PORT || 5000);
 
 app.use(morgan('common'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-route_loader.init(app, express.Router());
-database.init(app, config);
+//Connect to MongoDB
+mongoose
+  .connect(db, { autoIndex: false, useNewUrlParser: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+mongoose.Promise = global.Promise;
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
+app.use("/shops", shopRouter);
+app.use("/songs", songRouter);
 
-//************************Server************************
+
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname + '/client/build/index.html'));
+    });    
+
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log('HttpServer starting  : ' + 'PORT=' + app.get('port'));
 });

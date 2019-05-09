@@ -11,25 +11,25 @@ export const tracklistRead = (shopInfo) => dispatch => {
     dispatch(selectedShopInfo(shopInfo));
 
     axios
-        .get(`/process/trackList/${shopInfo.selected_shopid}`)
+        .get(`/songs/${shopInfo.selected_shopid}`)
         .then(response => {
-            dispatch(updateTrackList(response.data.results));
+            dispatch(updateTrackList(response.data.songs));
         });
 };
 
 export const tracklistAdd = songInfo => dispatch => {
     axios
-        .post("/process/addSong", songInfo)
+        .post("/songs", songInfo)
         .then(response => {
-            dispatch(updateTrackList(response.data.results));
+            dispatch(updateTrackList(response.data.songs));
         });
 };
 
 export const tracklistRemove = songInfo => dispatch => {
     axios
-        .delete(`/process/removeSong/${songInfo.shopid}/${songInfo.songid}`)
+        .delete(`/songs/${songInfo.shopid}/${songInfo.songid}`)
         .then(response => {
-            dispatch(updateTrackList(response.data.results));
+            dispatch(updateTrackList(response.data.songs));
         });
 };
 
