@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const mongoose = require("mongoose");
-const db = require("./config/keys_dev").db_url;
+const db = require("./config/keys");
 
 // Router
 const shopRouter = require("./routes/api/shops");
@@ -30,13 +30,13 @@ mongoose.Promise = global.Promise;
 app.use("/shops", shopRouter);
 app.use("/songs", songRouter);
 
-
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, 'client/build')));
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname + '/client/build/index.html'));
     });    
-
+}
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('HttpServer starting  : ' + 'PORT=' + app.get('port'));
